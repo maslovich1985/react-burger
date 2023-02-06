@@ -3,6 +3,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 
 import styles from './IngredientCard.module.css'
 import PropTypes from "prop-types";
+import DataPropTypes from '../../../../utils/prop-types';
 
 function IngredientCard(props) {
     const mockOrder = {
@@ -17,7 +18,6 @@ function IngredientCard(props) {
         }
         return mockOrder[type] === index;
     }
-    console.log(props);
     const { products, index } = props;
     const digitsTextStyle = 'text text text_type_digits-default';
     const defaultTextStyle = 'text text_type_main-default';
@@ -41,21 +41,6 @@ function IngredientCard(props) {
         </div>
     );
 }
-
-const DataPropTypes = PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    type: PropTypes.oneOf(['main', 'bun', 'sauce']),
-    __v: 0,
-    _id: PropTypes.string.isRequired,
-});
 
 IngredientCard.propTypes ={
     data: DataPropTypes.isRequired,

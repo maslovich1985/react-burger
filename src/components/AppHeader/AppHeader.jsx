@@ -10,11 +10,11 @@ const AppHeader = () => {
                 <nav className={styles.order_container}>
                     <div className={`${styles.burger_constructor} mr-2`}>
                         <BurgerIcon className='ml-4' type="primary" />
-                        <span className={`${defaultTextStyle} ml-2`}>Коструктор</span>
+                        <a href="/some/valid/uri" className={`${defaultTextStyle} ml-2`}>Коструктор</a>
                     </div>
                     <div className={styles.order_list}>
                         <ListIcon type="secondary" />
-                        <span className={`${inactiveTextStyle} ml-2`}>Лента заказов</span>
+                        <a href="/some/valid/uri" className={`${inactiveTextStyle} ml-2`}>Лента заказов</a>
                     </div>
                 </nav>
                 <div className={styles.logo}>
@@ -22,7 +22,7 @@ const AppHeader = () => {
                 </div>
                 <div className={styles.personal_account}>
                     <ProfileIcon type="secondary" />
-                    <span className={`${inactiveTextStyle} ml-2`}>Личный кабинет</span>
+                    <a href="/some/valid/uri" className={`${inactiveTextStyle} ml-2`}>Личный кабинет</a>
                 </div>
             </header>
     );
