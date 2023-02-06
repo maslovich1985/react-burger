@@ -1,0 +1,9 @@
+.wrapper {
+    width: 600px;
+}
+
+.ingredients_cards_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+}
