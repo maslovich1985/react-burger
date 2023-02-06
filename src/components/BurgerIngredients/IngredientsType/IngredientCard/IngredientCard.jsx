@@ -3,7 +3,6 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 
 import styles from './IngredientCard.module.css'
 import PropTypes from "prop-types";
-import IngredientsType from "../IngredientsType";
 
 function IngredientCard(props) {
     const mockOrder = {
@@ -58,9 +57,9 @@ const DataPropTypes = PropTypes.shape({
     _id: PropTypes.string.isRequired,
 });
 
-IngredientsType.propTypes = PropTypes.shape({
+IngredientCard.propTypes ={
     data: DataPropTypes.isRequired,
     index: PropTypes.number.isRequired,
-})
+}
 
 export default IngredientCard;
