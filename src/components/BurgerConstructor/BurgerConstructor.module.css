@@ -1,0 +1,47 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 16px;
+    width: 600px;
+    height: 912px;
+}
+
+.checkout {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.price > svg {
+    width: 33px;
+    height: 33px;
+}
+
+.burger_constructor {
+    display: flex;
+    justify-content: flex-end;
+    height: 656px;
+    width: 572px;
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
+
+.burger_constructor::-webkit-scrollbar {
+    width: 11px;
+}
+
+.burger_constructor::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+.burger_constructor::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border: 3px solid #2F2F37;
+}

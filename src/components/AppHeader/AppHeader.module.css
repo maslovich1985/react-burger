@@ -1,0 +1,60 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: calc(100% - 80px);
+    height: 88px;
+    background: #1C1C21;
+}
+
+.logo > svg {
+    height: 40px;
+    margin-left: 112px;
+}
+
+.order_container {
+    display: flex;
+    flex-direction: row;
+    width: 364px;
+    height: 56px;
+}
+
+.burger_constructor {
+    width: 178px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.burger_constructor > svg {
+    margin-left: 20px;
+}
+
+.order_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 197px;
+    height: 56px;
+}
+
+.order_list_text {
+    width: 125px;
+}
+
+.personal_account {
+    width: 207px;
+    height: 56px;
+    margin-left: 378px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-inactive-color) !important;
+}
+
