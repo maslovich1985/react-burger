@@ -1,0 +1,36 @@
+.wrapper {
+    width: 520px;
+    height: 436px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+.img_style {
+    width: 520px;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+}
+
+.nutrients_container {
+    width: 476px;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.calories {
+    width: 120px;
+    height: 56px;
+    text-align: center;
+}
+
+.nutrients {
+    width: 112px;
+    height: 56px;
+    text-align: center;
+}
