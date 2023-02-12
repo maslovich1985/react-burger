@@ -36,7 +36,7 @@ function IngredientDetails({ingredient}) {
 }
 
 IngredientDetails.propTypes = {
-    ingredient: DataPropTypes
+    ingredient: DataPropTypes.isRequired
 }
 
 export default IngredientDetails;

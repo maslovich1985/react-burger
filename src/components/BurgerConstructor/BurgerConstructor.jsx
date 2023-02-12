@@ -4,8 +4,7 @@ import BurgerIngredients from './BurgerIngredients/BurgerIngredients';
 import {CurrencyIcon, Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import DataPropTypes from "../../utils/prop-types";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import ModalPortal from "../ModalPortal/ModalPortal";
+import ModalPortal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 
 function BurgerConstructor({data}) {
@@ -43,12 +42,9 @@ function BurgerConstructor({data}) {
                     Оформить заказ
                 </Button>
                 {isModalOpened && (
-                    <>
-                        <ModalPortal onClick={closeModal} isShowHeader={false}>
-                            <OrderDetails/>
-                        </ModalPortal>
-                        <ModalOverlay onClick={closeModal}/>
-                    </>
+                    <ModalPortal onClick={closeModal} isShowHeader={false}>
+                        <OrderDetails/>
+                    </ModalPortal>
                 )}
             </div>
         </section>
@@ -56,7 +52,7 @@ function BurgerConstructor({data}) {
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(DataPropTypes)
+    data: PropTypes.arrayOf(DataPropTypes).isRequired
 }
 
 export default BurgerConstructor;

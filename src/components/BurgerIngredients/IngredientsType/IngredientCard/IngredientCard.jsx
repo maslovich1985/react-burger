@@ -42,7 +42,7 @@ function IngredientCard({ products, index, onClick }) {
 }
 
 IngredientCard.propTypes = {
-    data: DataPropTypes,
+    products: DataPropTypes.isRequired,
     index: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
 }
