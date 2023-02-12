@@ -11,7 +11,7 @@ const DataPropTypes = PropTypes.shape({
     price: PropTypes.number.isRequired,
     proteins: PropTypes.number.isRequired,
     type: PropTypes.oneOf(['main', 'bun', 'sauce']),
-    __v: 0,
+    __v: PropTypes.number.isRequired,
     _id: PropTypes.string.isRequired,
 });
 

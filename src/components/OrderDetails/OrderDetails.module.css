@@ -1,0 +1,36 @@
+.wrapper {
+    width: 720px;
+    height: 614px;
+}
+
+.order_number {
+    width: 520px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 32px;
+}
+
+.order_identifier {
+    width: 520px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 60px;
+}
+
+.order_accepted_icon {
+    width: 520px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.prepared_order_text {
+    width: 520px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+}
+
