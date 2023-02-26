@@ -1,29 +1,24 @@
 import React from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import styles from './IngredientCard.module.css'
 import PropTypes from "prop-types";
 import DataPropTypes from '../../../../utils/prop-types';
+import { useDrag } from "react-dnd";
 
 function IngredientCard({ products, index, onClick }) {
-    const mockOrder = {
-        'bun': 0,
-        'sauce': 1,
-        'main': [2, 3, 4, 5, 7],
-    };
-
-    const getOrder = (type, index) => {
-        if (Array.isArray(mockOrder[type])) {
-            return mockOrder[type].includes(index);
-        }
-        return mockOrder[type] === index;
-    }
+    const [{isDrag}, dragRef] = useDrag({
+        type: products.type,
+        item: { id: products._id },
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    });
     const digitsTextStyle = 'text text text_type_digits-default';
     const defaultTextStyle = 'text text_type_main-default';
     return (
-        <div onClick={() => onClick(products._id)} className={`${index % 2 === 0 ? 'ml-4' : 'ml-6'} ${index > 1 ? 'mt-8' : 'mt-6'} ${styles.wrapper}`}>
-            { getOrder(products.type, index) && <div className={styles.counter}>
-                <Counter count={1} size="default" />
+        !isDrag && <div  ref={dragRef} onClick={() => onClick(products._id)} className={`${index % 2 === 0 ? 'ml-4' : 'ml-6'} ${index > 1 ? 'mt-8' : 'mt-6'} ${styles.wrapper}`}>
+            { products.count > 0 && <div className={styles.counter}>
+                <Counter count={products.count} size="default" />
             </div>}
             <div>
                     <img src={products.image} alt='ингридиент'/>
