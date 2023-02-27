@@ -10,7 +10,7 @@ const AppHeader = () => {
                 <nav className={styles.order_container}>
                     <div className={`${styles.burger_constructor} mr-2`}>
                         <BurgerIcon className='ml-4' type="primary" />
-                        <a href="/some/valid/uri" className={`${defaultTextStyle} ml-2`}>Коструктор</a>
+                        <a href="/some/valid/uri" className={`${defaultTextStyle} ${styles.active} ml-2`}>Коструктор</a>
                     </div>
                     <div className={styles.order_list}>
                         <ListIcon type="secondary" />
