@@ -1,12 +1,12 @@
 import { GET_ORDER_REQUEST, GET_ORDER_ERROR, GET_ORDER_SUCCESS } from "../types/orderTypes";
 
 export const orderState = {
-    order: {},
+    order: null,
     requestIsSent: false,
     responseError: false,
 }
 
-const orderReducer = (state = orderState, action) => {
+const orderInfo = (state = orderState, action) => {
     switch (action.type) {
         case GET_ORDER_REQUEST:
             return {...state, requestIsSent: true };
@@ -21,4 +21,4 @@ const orderReducer = (state = orderState, action) => {
             return state;
     }
 };
-export default orderReducer;
+export default orderInfo;

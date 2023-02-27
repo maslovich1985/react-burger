@@ -3,9 +3,9 @@ import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import styles from './App.module.css'
-import {getIngredientsThunk} from "../../utils/services/redux/actions/ingredientsListActions";
+import {getIngredientsThunk} from "../../services/redux/actions/ingredientsListActions";
 import { useDispatch, useSelector } from "react-redux";
-import {ingredients, responseError} from "../../utils/services/redux/selectors/ingredientsListSelector";
+import {ingredients, responseError} from "../../services/redux/selectors/ingredientsListSelector";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 

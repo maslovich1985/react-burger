@@ -5,7 +5,7 @@ import styles from './BurgerIngredients.module.css'
 import ModalPortal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import {useDispatch} from "react-redux";
-import {getIngredientDetails} from "../../utils/services/redux/actions/viewedIngredientActions";
+import {getIngredientDetails} from "../../services/redux/actions/viewedIngredientActions";
 
 function BurgerIngredients() {
     const dispatch = useDispatch();

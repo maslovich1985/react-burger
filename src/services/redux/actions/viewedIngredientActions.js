@@ -1,5 +1,5 @@
 import {VIEW_DETAILS} from "../types/viewedIngredientTypes";
-import {store} from "../../../../index";
+import {store} from "../../../index";
 
 export const getIngredientDetails = (id) => {
     const data = store.getState().ingredients.ingredients;

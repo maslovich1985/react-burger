@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import styles from './BurgerConstructor.module.css'
 import BurgerIngredients from './BurgerIngredients/BurgerIngredients';
 import {CurrencyIcon, Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalPortal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import {useDispatch, useSelector} from "react-redux";
-import {getOrderThunk} from "../../utils/services/redux/actions/orderActions";
+import {getOrderThunk} from "../../services/redux/actions/orderActions";
 import { useDrop } from "react-dnd";
-import {addIngredientInBurger} from "../../utils/services/redux/actions/burgerIngredientsActions";
-import {burgerIngredients} from "../../utils/services/redux/selectors/burgerIngredientSelector";
-import {increaseIngredientCounter} from "../../utils/services/redux/actions/ingredientsListActions";
+import {addIngredientInBurger} from "../../services/redux/actions/burgerIngredientsActions";
+import {burgerIngredients} from "../../services/redux/selectors/burgerIngredientSelector";
+import {increaseIngredientCounter} from "../../services/redux/actions/ingredientsListActions";
 
 function BurgerConstructor() {
     const dispatch = useDispatch();
@@ -23,16 +23,7 @@ function BurgerConstructor() {
         },
     });
     const [isModalOpened, setIsModalOpened] = useState(false);
-    useEffect(() => {
-        function handleEscapeKey(event) {
-            if (event.code === 'Escape') {
-                setIsModalOpened(false);
-            }
-        }
 
-        document.addEventListener('keydown', handleEscapeKey)
-        return () => document.removeEventListener('keydown', handleEscapeKey)
-    }, [])
     const burgerCost = burgerData.map((ingredient) => ingredient?.price).reduce((acc, cur) => acc + cur, 0);
     const digitsTextStyle = 'text text_type_digits-medium';
 
@@ -40,6 +31,8 @@ function BurgerConstructor() {
         dispatch(getOrderThunk(burgerData));
         setIsModalOpened(true);
     }
+
+    const isDisable = burgerData.every(item=> item.type !== 'bun');
     const closeModal = () => setIsModalOpened(false);
     return (<section ref={dropTarget} className={styles.wrapper}>
                     <div className={`${styles.burger_constructor} mt-25 mr-4`}>
@@ -52,7 +45,7 @@ function BurgerConstructor() {
                             </div>
                             <CurrencyIcon type="primary" />
                         </div>
-                        <Button htmlType="button" type="primary" size="large" onClick={openModal}>
+                        <Button disabled={isDisable} htmlType="button" type="primary" size="large" onClick={openModal}>
                             Оформить заказ
                         </Button>
                         {isModalOpened && (

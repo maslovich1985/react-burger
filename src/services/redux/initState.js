@@ -4,9 +4,9 @@ import {orderState} from "./reducers/orderReducer";
 import {burgerIngredientsState} from "./reducers/burgerIngredientsReducer";
 
 const initState = {
-    ingredientsList: ingredientsListState,
+    ingredients: ingredientsListState,
     burgerIngredients: burgerIngredientsState,
-    orderObject: orderState,
+    orderInfo: orderState,
     viewedIngredient: ingredientDetailsState,
 };
 

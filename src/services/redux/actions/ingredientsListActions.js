@@ -1,6 +1,6 @@
 import { GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_ERROR, DECREASE_INGREDIENTS_COUNTER,
     INCREASE_INGREDIENTS_COUNTER } from "../types/ingredientsListTypes";
-import { getIngredients } from "../../../burger-api";
+import { getIngredients } from "../../../utils/burger-api";
 
 const getIngredientsSucces = (ingredients) => {
     return {

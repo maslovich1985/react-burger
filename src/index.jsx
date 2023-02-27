@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App/App';
 import { Provider } from "react-redux";
-import {configureStore} from "./utils/services/redux/store";
-import initState from "./utils/services/redux/initState";
+import {configureStore} from "./services/redux/store";
+import initState from "./services/redux/initState";
 
 export const store = configureStore(initState);
 

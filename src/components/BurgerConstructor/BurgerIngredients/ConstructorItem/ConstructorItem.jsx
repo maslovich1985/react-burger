@@ -3,13 +3,14 @@ import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger
 import {
     moveIngredientInBurger,
     removeIngredientFromBurger
-} from "../../../../utils/services/redux/actions/burgerIngredientsActions";
-import {decreaseIngredientCounter} from "../../../../utils/services/redux/actions/ingredientsListActions";
+} from "../../../../services/redux/actions/burgerIngredientsActions";
+import {decreaseIngredientCounter} from "../../../../services/redux/actions/ingredientsListActions";
 import {useDispatch} from "react-redux";
 import {useDrag, useDrop} from "react-dnd";
 import PropTypes from "prop-types";
+import styles from './ConstructorItem.module.css'
 
-export default function ConstructorItem({key, name, itemId, price, image, index}) {
+export default function ConstructorItem({name, itemId, price, image, index}) {
     const dispatch = useDispatch();
     const [, drag] = useDrag({
         type: "burgerConstructor",
@@ -33,8 +34,8 @@ export default function ConstructorItem({key, name, itemId, price, image, index}
         dispatch(decreaseIngredientCounter(id));
     }
     return (
-        <div key={key} ref={dropRef}>
-            <div ref={drag} className='mt-4 mb-4' >
+        <div ref={dropRef}>
+            <div ref={drag} className={`${styles.constructor_item} mt-4 mb-4`} >
                 <DragIcon type="primary" />
                 <ConstructorElement
                     isLocked={false}
@@ -49,7 +50,6 @@ export default function ConstructorItem({key, name, itemId, price, image, index}
 }
 
 ConstructorItem.propTypes = {
-    key: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     itemId: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

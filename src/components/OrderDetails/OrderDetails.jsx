@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './OrderDetails.module.css'
 import DoneIcon from "../../utils/doneIcon";
 import {useSelector} from "react-redux";
-import {order, requestIsSent, responseError} from "../../utils/services/redux/selectors/orderSelector";
+import {order, requestIsSent, responseError} from "../../services/redux/selectors/orderSelector";
 
 function OrderDetails() {
     const orderInfo = useSelector(order);

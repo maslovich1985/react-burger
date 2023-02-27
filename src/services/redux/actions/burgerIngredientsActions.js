@@ -1,5 +1,5 @@
 import {ADD_TO_CONSTRUCTOR, REMOVE_FROM_CONSTRUCTOR, MOVE_IN_CONSTRUCTOR} from "../types/burgerIngredientsTypes";
-import {store} from "../../../../index";
+import {store} from "../../../index";
 
 export const addIngredientInBurger = ({id}) => {
     const data = store.getState().ingredients.ingredients;

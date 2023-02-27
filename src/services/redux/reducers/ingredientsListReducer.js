@@ -21,21 +21,19 @@ const ingredientsListReducer = (state = ingredientsListState, action) => {
 
         case INCREASE_INGREDIENTS_COUNTER:
             const { id: increasedId } = action.payload;
-
-            const bunFinder = (id) => {
-                const bunIndex = state.ingredients.findIndex(ingredient => ingredient._id === id && ingredient.type === 'bun');
-                return bunIndex !== -1;
-            }
-            const bunType = (item) => item.type === 'bun';
-            const increaseCounter = [...state.ingredients.map((item) => item._id === increasedId
-                ? ({...item, count: bunType(item) && item.count === 0
-                        ? item.count + 2
-                        : bunType(item) && item.count !== 0
-                        ? item.count
-                            : item.count + 1 })
-                : bunFinder(increasedId) && bunType(item) ? ({...item, count: 0 })
-                    : item)];
-            return {...state, ingredients: increaseCounter };
+            const increasedIngredient = state.ingredients.find(ingredient => ingredient._id === increasedId);
+            const updateIngredients = state.ingredients.map((item) => {
+                if (item._id !== increasedId) {
+                    if (item.type === 'bun' && increasedIngredient.type === 'bun') {
+                        item.count = 0;
+                        return item;
+                    }
+                    return item;
+                }
+                item.count = item.type === 'bun' ? 2 : item.count + 1;
+                return item;
+            });
+            return { ...state, ingredients: updateIngredients };
 
         case DECREASE_INGREDIENTS_COUNTER:
             const decreasedId = action.payload;

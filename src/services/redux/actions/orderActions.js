@@ -1,5 +1,5 @@
 import { GET_ORDER_ERROR, GET_ORDER_REQUEST, GET_ORDER_SUCCESS } from "../types/orderTypes";
-import { getOrder } from "../../../burger-api";
+import { getOrder } from "../../../utils/burger-api";
 
 const getOrderSucces = (order) => {
     return {

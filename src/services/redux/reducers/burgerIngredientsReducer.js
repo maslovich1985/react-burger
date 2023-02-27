@@ -4,7 +4,7 @@ export const burgerIngredientsState = {
     burgerIngredients: [],
 }
 
-const burgerIngredientsReducer = (state = burgerIngredientsState, action) => {
+const burgerIngredients = (state = burgerIngredientsState, action) => {
     switch (action.type) {
         case ADD_TO_CONSTRUCTOR:
             const ingredient = action.payload;
@@ -51,4 +51,4 @@ const burgerIngredientsReducer = (state = burgerIngredientsState, action) => {
             return state;
     }
 };
-export default burgerIngredientsReducer;
+export default burgerIngredients;

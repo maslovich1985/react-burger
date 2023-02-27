@@ -3,7 +3,7 @@ import styles from './IngredientsType.module.css'
 import IngredientCard from "./IngredientCard/IngredientCard";
 import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
-import {ingredients} from "../../../utils/services/redux/selectors/ingredientsListSelector";
+import {ingredients} from "../../../services/redux/selectors/ingredientsListSelector";
 import {useInView} from "react-intersection-observer";
 
 function IngredientsType({type, setTab, onClick}) {
