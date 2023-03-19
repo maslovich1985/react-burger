@@ -61,3 +61,7 @@ a {
     color: var(--text-primary-color) !important;
 }
 
+.inactive {
+    color: var(--text-inactive-color) !important;
+}
+

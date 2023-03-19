@@ -1,46 +1,61 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
-import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import styles from './App.module.css'
 import {getIngredientsThunk} from "../../services/redux/actions/ingredientsListActions";
-import { useDispatch, useSelector } from "react-redux";
-import {ingredients, responseError} from "../../services/redux/selectors/ingredientsListSelector";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import {userProfileThunk} from "../../services/redux/actions/userActions";
+import { useDispatch } from "react-redux";
+import IngredientPage from "../../pages/IngredientPage/IngredientPage";
+import Login from "../../pages/Login/Login";
+import Register from "../../pages/Register/Register";
+import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "../../pages/ResetPassword/ResetPassword";
+import Profile from "../../pages/Profile/Profile";
+import {MainPage} from "../../pages/MainPage/MainPage";
+import {ProtectedRouteElement} from "../ProtectedRoute/ProtectedRoute"
+import Orders from "../../pages/Orders/Orders";
 
 function App() {
-
     const dispatch = useDispatch();
-    const error = useSelector(responseError);
-    const data = useSelector(ingredients);
     useEffect(() => {
         dispatch(getIngredientsThunk());
+        dispatch(userProfileThunk());
     }, [dispatch])
 
-    if (error) {
-        return (
-            <section>
-                <h1>Что-то пошло не так :(</h1>
-                <p>
-                    В приложении произошла ошибка. Пожалуйста, перезагрузите страницу.
-                </p>
-            </section>
-        );
-    }
-
     return (
-        <>
+        <Router>
             <AppHeader/>
-            { data.length && (
-                <main className={styles.wrapper}>
-                    <DndProvider backend={HTML5Backend}>
-                        <BurgerIngredients/>
-                        <BurgerConstructor/>
-                    </DndProvider>
-                </main>
-            )}
-        </>
+            <Routes>
+                <Route 
+                    path="/" 
+                    element={
+                        <ProtectedRouteElement>
+                            <MainPage />
+                        </ProtectedRouteElement>
+                    }
+                />
+                <Route
+                    path='/profile/orders'
+                    element={
+                        <ProtectedRouteElement>
+                            <Orders />
+                        </ProtectedRouteElement>
+                    }
+                />
+                <Route path="/ingredients/:id" element={<IngredientPage />}/>
+                <Route path="/login" element={<Login />}/>
+                <Route path="/register" element={<Register />}/>
+                <Route path="/forgot-password" element={<ForgotPassword />}/>
+                <Route path="/reset-password" element={<ResetPassword />}/>
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRouteElement>
+                            <Profile />
+                        </ProtectedRouteElement>
+                    }
+                />
+            </Routes>
+        </Router>
   );
 }
 
