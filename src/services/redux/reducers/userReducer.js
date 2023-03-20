@@ -50,6 +50,7 @@ const userReducer = (state = userState, action) => {
       };
 
     case UPDATE_PROFILE_FAILED:
+    case REFRESH_TOKEN_FAILED:
     case LOGOUT_USER_FAILED:
     case REGISTER_USER_ERROR:
     case PASSWORD_RESET_FAILED:
@@ -58,7 +59,6 @@ const userReducer = (state = userState, action) => {
     case LOGIN_USER_ERROR:
       return { ...state, requestIsSent: false, responseError: true };
 
-    case REFRESH_TOKEN_FAILED:
     case LOGOUT_USER_SUCCESS:
       return {...userState}
 

@@ -171,7 +171,7 @@ export const userLoginThunk = (data) => (dispatch) => {
                     })
                     .catch(() => dispatch(refreshTokenError()));
             } else {
-                dispatch(userProfileError())
+                dispatch(userLoginError())
             }
         });
     }
