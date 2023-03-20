@@ -46,7 +46,7 @@ export function userRegister(data) {
         .then(checkRes)
 }
 
-export function userLogin(data) { // "ssss@gmail.com", "Alex", 'qwerty'
+export function userLogin(data) {
     return fetch(`${NORMA_API}/auth/login`, {
         method: 'POST',
         mode: 'cors',

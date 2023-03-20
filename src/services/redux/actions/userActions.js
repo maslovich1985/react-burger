@@ -153,7 +153,27 @@ export const userLoginThunk = (data) => (dispatch) => {
             dispatch(userLoginSuccess(res));
             setCookie('accessToken', res.accessToken);
             setCookie('refreshToken', res.refreshToken);
-        }).catch(() => dispatch(userLoginError()));
+        }).catch((e) => {
+            if (e.message === 'jwt expired') {
+                return refreshToken()
+                    .then((data) => {
+                        setCookie('accessToken', data.accessToken);
+                        setCookie('refreshToken', data.refreshToken);
+                        dispatch(refreshTokenSuccess());
+                    })
+                    .then(() => {
+                        userLogin()
+                            .then((data) => dispatch(userLoginSuccess(data)))
+                            .catch(() => {
+                                dispatch(userLoginError())
+                                dispatch(refreshTokenError());
+                            });
+                    })
+                    .catch(() => dispatch(refreshTokenError()));
+            } else {
+                dispatch(userProfileError())
+            }
+        });
     }
 }
 

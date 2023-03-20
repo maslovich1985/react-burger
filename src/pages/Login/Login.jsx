@@ -23,7 +23,6 @@ function Login() {
             navigate('/');
         }
     }, [isAuth, navigate]);
-
     const mediumTextStyle = 'text text_type_main-medium';
     const inactiveTextStyle = 'text text_type_main-default text_color_inactive';
     return (
