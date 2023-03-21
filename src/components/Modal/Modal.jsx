@@ -9,10 +9,10 @@ import {useNavigate} from "react-router-dom";
 const portalRoot = document.getElementById('react-modals');
 
 function Modal({onClick, children, isShowHeader}) {
+    const navigate = useNavigate();
     const closeModal = () => {
         onClick ? onClick() : navigate('/');
     }
-    const navigate = useNavigate();
     useEffect(() => {
         function handleEscapeKey(event) {
             if (event.code === 'Escape') {

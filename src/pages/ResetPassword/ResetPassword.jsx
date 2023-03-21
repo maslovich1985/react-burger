@@ -1,19 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./ResetPassword.module.css";
 import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {resetPassWithCode} from "../../services/redux/actions/userActions";
 import {useDispatch} from "react-redux";
 
 function ResetPassword() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const [isPassShown, setIsPassShown] = useState(false);
     const [password, setPassword] = useState('');
     const [isCodeShown, setIsCodeShown] = useState(false);
     const [code, setCode] = useState('');
     const mediumTextStyle = 'text text_type_main-medium';
     const inactiveTextStyle = 'text text_type_main-default text_color_inactive';
+    const isValidPrevPage =  location.state && location.state.from === '/forgot-password';
 
     const handleRecoverPassWithCode = (e) => {
         e.preventDefault();
@@ -22,6 +24,12 @@ function ResetPassword() {
                 navigate('/')
             })
     }
+
+    useEffect(() => {
+        if (!isValidPrevPage) {
+            navigate('/login')
+        }
+    }, [isValidPrevPage, navigate]);
 
     return (
         <div className={styles.wrapper}>

@@ -29,14 +29,7 @@ function App() {
         <>
             <AppHeader/>
             <Routes location={background || location}>
-                <Route 
-                    path="/" 
-                    element={
-                        <ProtectedRouteElement>
-                            <MainPage />
-                        </ProtectedRouteElement>
-                    }
-                />
+                <Route path="/" element={<MainPage />}/>
                 <Route
                     path='/profile/orders'
                     element={
@@ -46,10 +39,38 @@ function App() {
                     }
                 />
                 <Route path="/ingredients/:id" element={<IngredientPage />}/>
-                <Route path="/login" element={<Login />}/>
-                <Route path="/register" element={<Register />}/>
-                <Route path="/forgot-password" element={<ForgotPassword />}/>
-                <Route path="/reset-password" element={<ResetPassword />}/>
+                <Route
+                    path="/login"
+                    element={
+                        <ProtectedRouteElement onlyUnAuth={true}>
+                            <Login />
+                        </ProtectedRouteElement>
+                    }
+                />
+                <Route
+                    path="/register"
+                    element={
+                        <ProtectedRouteElement onlyUnAuth={true}>
+                            <Register />
+                        </ProtectedRouteElement>
+                    }
+                />
+                <Route
+                    path="/forgot-password"
+                    element={
+                        <ProtectedRouteElement onlyUnAuth={true}>
+                            <ForgotPassword />
+                        </ProtectedRouteElement>
+                    }
+                />
+                <Route
+                    path="/reset-password"
+                    element={
+                        <ProtectedRouteElement onlyUnAuth={true}>
+                            <ResetPassword />
+                        </ProtectedRouteElement>
+                    }
+                />
                 <Route
                     path="/profile"
                     element={

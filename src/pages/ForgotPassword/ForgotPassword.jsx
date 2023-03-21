@@ -14,7 +14,7 @@ function ForgotPassword() {
         e.preventDefault();
         Promise.resolve(dispatch(resetUserPassword(email)))
             .then(() => {
-                navigate('/reset-password')
+                navigate('/reset-password', { state: { from: '/forgot-password' } })
             })
     }
     const mediumTextStyle = 'text text_type_main-medium';

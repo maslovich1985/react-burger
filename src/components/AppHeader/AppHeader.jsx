@@ -10,10 +10,14 @@ const AppHeader = () => {
     return (
             <header className={`${styles.wrapper} mt-10`}>
                 <nav className={styles.order_container}>
-                    <div className={`${styles.burger_constructor} mr-2`}>
-                        <BurgerIcon className='ml-4' type="primary" />
-                        <NavLink to="/" className={navLinkClass}>Коструктор</NavLink>
-                    </div>
+                    <NavLink to="/" className={navLinkClass}>
+                        <div className={`${styles.burger_constructor} mr-2`}>
+                            <BurgerIcon className='ml-4' type="primary" />
+                            <span className='ml-2'>
+                                Коструктор
+                            </span>
+                        </div>
+                    </NavLink>
                     <div className={styles.order_list}>
                         <ListIcon type="secondary" />
                         <NavLink to="/profile/orders " className={navLinkClass}>Лента заказов</NavLink>
@@ -22,10 +26,14 @@ const AppHeader = () => {
                 <div className={styles.logo}>
                     <Logo />
                 </div>
-                <div className={styles.personal_account}>
-                    <ProfileIcon type="secondary" />
-                    <NavLink to="/profile" className={navLinkClass}>Личный кабинет</NavLink>
-                </div>
+                    <NavLink to="/profile" className={navLinkClass}>
+                        <div className={styles.personal_account}>
+                            <ProfileIcon type="secondary" />
+                            <span className='ml-2'>
+                                Личный кабинет
+                            </span>
+                        </div>
+                    </NavLink>
             </header>
     );
 };

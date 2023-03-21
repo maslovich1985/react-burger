@@ -17,7 +17,8 @@ export function getOrder(orderData) {
     return fetch(`${NORMA_API}/orders`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: getCookie('accessToken')
         },
         body: JSON.stringify(orderData),
     })
@@ -119,7 +120,8 @@ export function logout() {
             'Content-Type': 'application/json;charset=utf-8',
         },
         body: JSON.stringify({ token: getCookie('refreshToken') }),
-    }).then(checkRes);
+    })
+        .then(checkRes);
 };
 
 export function updateProfile(name, email) {
@@ -130,5 +132,6 @@ export function updateProfile(name, email) {
             Authorization: getCookie('accessToken'),
         },
         body: JSON.stringify({ name, email }),
-    }).then(checkRes);
+    })
+        .then(checkRes);
 };

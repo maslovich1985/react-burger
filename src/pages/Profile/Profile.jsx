@@ -39,7 +39,7 @@ function Profile() {
             navigate('/profile/orders');
         }
         if (type === profilePanel.logout) {
-            Promise.resolve(dispatch(logoutUser())).then(() => navigate('/login'));
+            Promise.resolve(dispatch(logoutUser())).then(() => navigate('/'));
         }
     }
     const cancelHandler = () => {
