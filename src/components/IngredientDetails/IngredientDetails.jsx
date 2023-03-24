@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './IngredientDetails.module.css'
 import {useSelector} from "react-redux";
 import {ingredientDetails} from "../../services/redux/selectors/viewedIngredientSelector";
 
 function IngredientDetails() {
+    useEffect(() => {
+        window.history.replaceState({}, null)
+    },[])
     const ingredient = useSelector(ingredientDetails);
     const nutrientsHeaders = {
         calories: 'Калории,ккал',
@@ -13,7 +16,7 @@ function IngredientDetails() {
     };
     const mediumTextStyle = 'text text_type_main-medium';
     const inactiveTextStyle = 'text text_type_main-default text_color_inactive';
-    return (
+    return ingredient && (
         <div className={styles.wrapper}>
             <img className={styles.img_style} src={ingredient.image_large} alt='ингридиент'/>
             <div className={`${mediumTextStyle} mt-4 mb-8`}>

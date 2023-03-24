@@ -1,0 +1,37 @@
+.wrapper {
+    width: 860px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    margin-top: 180px;
+    margin-left: 9%;
+}
+
+.input_container {
+    width: 480px;
+    height: 360px;
+}
+
+.buttons_container {
+    display: flex;
+    width: 480px;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.tabs_container {
+    width: 320px;
+    height: 320px;
+    cursor: pointer;
+}
+
+.tab {
+    width: 320px;
+    height: 60px;
+}
+
+.tabs_info {
+    width: 320px;
+    height: 48px;
+}

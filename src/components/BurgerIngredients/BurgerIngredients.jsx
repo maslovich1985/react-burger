@@ -2,25 +2,24 @@ import React, { useState } from 'react';
 import IngredientsType from "./IngredientsType/IngredientsType";
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './BurgerIngredients.module.css'
-import ModalPortal from "../Modal/Modal";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getIngredientDetails} from "../../services/redux/actions/viewedIngredientActions";
+import {useNavigate} from "react-router-dom";
+import {ingredients} from "../../services/redux/selectors/ingredientsListSelector";
 
 function BurgerIngredients() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [isModalOpened, setIsModalOpened] = useState(false);
-
+    const items = useSelector(ingredients);
     const ingredientTypes = ['Булки', 'Соусы', 'Начинки'];
     const [currentTab, setCurrentTab] = useState(ingredientTypes[0]);
     const ingredientsTitle = 'Соберите бургер';
     const largeTextStyle = 'text text_type_main-large';
     const openModal = (id) => {
-        dispatch(getIngredientDetails(id));
-        setIsModalOpened(true);
+        const ingredient = items.find((item) => item._id === id)
+        dispatch(getIngredientDetails(ingredient));
+        navigate(`/ingredients/${id}`, {state: {background: true}})
     }
-
-    const closeModal = () => setIsModalOpened(false);
 
     return (
         <section className={styles.wrapper}>
@@ -35,11 +34,6 @@ function BurgerIngredients() {
             <div className={styles.ingredient_types_container}>
                 <IngredientsType onClick={openModal} type={currentTab} setTab={setCurrentTab}/>
             </div>
-            {isModalOpened && (
-                <ModalPortal onClick={closeModal} isShowHeader={true}>
-                    <IngredientDetails/>
-                </ModalPortal>
-            )}
         </section>
     );
 }

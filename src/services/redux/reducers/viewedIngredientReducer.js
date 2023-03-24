@@ -7,7 +7,7 @@ export const ingredientDetailsState = {
 const burgerIngredientsReducer = (state = ingredientDetailsState, action) => {
     switch (action.type) {
         case VIEW_DETAILS:
-            return action.payload;
+            return {...state, ingredientDetails: action.payload};
 
         default:
             return state;
