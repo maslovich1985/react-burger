@@ -5,7 +5,7 @@ import styles from './IngredientCard.module.css'
 import PropTypes from "prop-types";
 import DataPropTypes from '../../../../utils/prop-types';
 
-function IngredientCard(props) {
+function IngredientCard({ products, index, onClick }) {
     const mockOrder = {
         'bun': 0,
         'sauce': 1,
@@ -18,11 +18,10 @@ function IngredientCard(props) {
         }
         return mockOrder[type] === index;
     }
-    const { products, index } = props;
     const digitsTextStyle = 'text text text_type_digits-default';
     const defaultTextStyle = 'text text_type_main-default';
     return (
-        <div className={`${index % 2 === 0 ? 'ml-4' : 'ml-6'} ${index > 1 ? 'mt-8' : 'mt-6'} ${styles.wrapper}`}>
+        <div onClick={() => onClick(products._id)} className={`${index % 2 === 0 ? 'ml-4' : 'ml-6'} ${index > 1 ? 'mt-8' : 'mt-6'} ${styles.wrapper}`}>
             { getOrder(products.type, index) && <div className={styles.counter}>
                 <Counter count={1} size="default" />
             </div>}
@@ -42,9 +41,10 @@ function IngredientCard(props) {
     );
 }
 
-IngredientCard.propTypes ={
-    data: DataPropTypes.isRequired,
+IngredientCard.propTypes = {
+    products: DataPropTypes.isRequired,
     index: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
 
 export default IngredientCard;

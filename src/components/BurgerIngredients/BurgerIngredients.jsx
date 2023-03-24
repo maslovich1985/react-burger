@@ -1,26 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IngredientsType from "./IngredientsType/IngredientsType";
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './BurgerIngredients.module.css'
-import data from '../../utils/data'
+import DataPropTypes from '../../utils/prop-types';
+import PropTypes from "prop-types";
+import ModalPortal from "../Modal/Modal";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
-function BurgerIngredients() {
+function BurgerIngredients({data}) {
+    const [isModalOpened, setIsModalOpened] = useState(false);
+    const [ingredient, setIngredient] = useState(null);
+
+    const ingredientTypes = ['Булки', 'Соусы', 'Начинки'];
+    const [currentTab, setCurrentTab] = useState(ingredientTypes[0]);
     const ingredientsTitle = 'Соберите бургер';
     const largeTextStyle = 'text text_type_main-large';
-    const inactiveTextStyle = 'text text_type_main-default text_color_inactive';
-    const ingredientTypes = ['Булки', 'Соусы', 'Начинки'];
+    const openModal = (id) => {
+        const ingredient = data.find(ingredient => ingredient._id === id);
+        setIngredient(ingredient);
+        setIsModalOpened(true);
+    }
+    const closeModal = () => setIsModalOpened(false);
+
     return (
         <section className={styles.wrapper}>
             <div className={`${largeTextStyle} ${styles.ingredients_title} mt-10 mb-5`}>{ingredientsTitle}</div>
-            <div className={`${inactiveTextStyle} ${styles.ingredient_types} mb-10`}>
+            <div className={`${styles.ingredient_types} mb-10`}>
                 {ingredientTypes.map((type, i) => (
-                    <div key={i} className={styles.ingredient_type}>{type}</div>
+                    <Tab key={i} value={type} active={currentTab === type} onClick={setCurrentTab}>
+                        {type}
+                    </Tab>
                 ))}
             </div>
             <div className={styles.ingredient_types_container}>
-                <IngredientsType data={data}/>
+                <IngredientsType onClick={openModal} data={data} type={currentTab}/>
             </div>
+            {isModalOpened && (
+                <ModalPortal onClick={closeModal} isShowHeader={true}>
+                    <IngredientDetails ingredient={ingredient}/>
+                </ModalPortal>
+            )}
         </section>
     );
+}
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(DataPropTypes).isRequired
 }
 
 export default BurgerIngredients;
