@@ -1,8 +1,23 @@
 import React from 'react';
 import styles from './OrderDetails.module.css'
 import DoneIcon from "../../utils/doneIcon";
+import {useSelector} from "react-redux";
+import {order, requestIsSent, responseError} from "../../services/redux/selectors/orderSelector";
 
 function OrderDetails() {
+    const orderInfo = useSelector(order);
+    const error = useSelector(responseError);
+    const request = useSelector(requestIsSent);
+    if (error) {
+        return (
+            <section>
+                <h1>Что-то пошло не так :(</h1>
+                <p>
+                    В приложении произошла ошибка. Пожалуйста, перезагрузите страницу.
+                </p>
+            </section>
+        );
+    }
     const largeDigitStyle = "text text_type_digits-large";
     const mediumTextStyle ="text text_type_main-medium";
     const inactiveText = 'text text_type_main-default text_color_inactive';
@@ -10,7 +25,7 @@ function OrderDetails() {
     return (
         <div className={`${styles.wrapper} mt-4`}>
             <div className={`${styles.order_number} ${largeDigitStyle}`}>
-                034536
+                {!request ? orderInfo.order?.number : ''}
             </div>
             <div className={`${styles.order_identifier} ${mediumTextStyle}`}>
                 идентификатор заказа

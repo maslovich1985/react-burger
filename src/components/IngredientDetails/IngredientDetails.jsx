@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './IngredientDetails.module.css'
-import DataPropTypes from "../../utils/prop-types";
+import {useSelector} from "react-redux";
+import {ingredientDetails} from "../../services/redux/selectors/viewedIngredientSelector";
 
-function IngredientDetails({ingredient}) {
+function IngredientDetails() {
+    const ingredient = useSelector(ingredientDetails);
     const nutrientsHeaders = {
         calories: 'Калории,ккал',
         proteins: 'Белки, г',
@@ -33,10 +35,6 @@ function IngredientDetails({ingredient}) {
             </div>
         </div>
     );
-}
-
-IngredientDetails.propTypes = {
-    ingredient: DataPropTypes.isRequired
 }
 
 export default IngredientDetails;

@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AppHeader from '../AppHeader/AppHeader'
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import styles from './App.module.css'
-import getIngredients from "../../utils/burger-api";
+import {getIngredientsThunk} from "../../services/redux/actions/ingredientsListActions";
+import { useDispatch, useSelector } from "react-redux";
+import {ingredients, responseError} from "../../services/redux/selectors/ingredientsListSelector";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const url = 'https://norma.nomoreparties.space/api'
+
+    const dispatch = useDispatch();
+    const error = useSelector(responseError);
+    const data = useSelector(ingredients);
     useEffect(() => {
-        getIngredients(url)
-            .then(json => setData(json.data))
-            .catch((response) => setError(response));
-    }, [])
+        dispatch(getIngredientsThunk());
+    }, [dispatch])
 
     if (error) {
         return (
@@ -25,13 +28,18 @@ function App() {
             </section>
         );
     }
+
     return (
         <>
             <AppHeader/>
-            {data && (<main className={styles.wrapper}>
-                <BurgerIngredients data={data}/>
-                <BurgerConstructor data={data}/>
-            </main>)}
+            { data.length && (
+                <main className={styles.wrapper}>
+                    <DndProvider backend={HTML5Backend}>
+                        <BurgerIngredients/>
+                        <BurgerConstructor/>
+                    </DndProvider>
+                </main>
+            )}
         </>
   );
 }
