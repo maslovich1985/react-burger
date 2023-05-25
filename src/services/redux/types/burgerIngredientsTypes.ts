@@ -1,0 +1,8 @@
+export const ADD_TO_CONSTRUCTOR = "ADD_TO_CONSTRUCTOR";
+export const REMOVE_FROM_CONSTRUCTOR = "REMOVE_FROM_CONSTRUCTOR";
+export const MOVE_IN_CONSTRUCTOR = "MOVE_IN_CONSTRUCTOR";
+
+export type BurgerIngredientsActionType =
+    | typeof ADD_TO_CONSTRUCTOR
+    | typeof REMOVE_FROM_CONSTRUCTOR
+    | typeof MOVE_IN_CONSTRUCTOR;
