@@ -21,6 +21,7 @@ export interface Ingredient {
     type: 'main' | 'bun' | 'sauce';
     __v: number;
     _id: string;
+    id: string;
 }
 
 function IngredientPage() {

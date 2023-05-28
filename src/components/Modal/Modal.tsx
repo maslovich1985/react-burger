@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useEffect} from 'react';
+import React, {FC, ReactElement, useCallback, useEffect} from 'react';
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './Modal.module.css'
 import {createPortal} from 'react-dom'
@@ -15,19 +15,19 @@ interface ModalProps {
 
 const Modal: FC<ModalProps> = ({onClick, children, isShowHeader}) => {
     const navigate = useNavigate();
-    const closeModal = () => {
+    const closeModal = useCallback(() => {
         onClick ? onClick() : navigate('/');
-    }
+    }, [onClick, navigate]);
     useEffect(() => {
         function handleEscapeKey(event: KeyboardEvent) {
             if (event.code === 'Escape') {
-                onClick ? onClick() : navigate('/');
+                closeModal();
             }
         }
 
         document.addEventListener('keydown', handleEscapeKey)
         return () => document.removeEventListener('keydown', handleEscapeKey)
-    }, [onClick, navigate]);
+    }, [onClick, navigate, closeModal]);
     const largeTextStyle = "text text_type_main-large";
     return (
         <>

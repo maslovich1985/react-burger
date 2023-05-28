@@ -14,13 +14,20 @@ import {IngredientWithCount} from "../BurgerIngredients/IngredientsType/Ingredie
 import {BurgerIngredientsAction} from "../../services/redux/reducers/burgerIngredientsReducer";
 import {IngredientsListAction} from "../../services/redux/reducers/ingredientsListReducer";
 import {OrderAction} from "../../services/redux/reducers/orderReducer";
+import {isAuthorized} from "../../services/redux/selectors/userSelectors";
+import {useNavigate} from "react-router-dom";
 
 function BurgerConstructor() {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const burgerData = useAppSelector<IngredientWithCount[]>(burgerIngredients);
+    const isAuth = useAppSelector<boolean>(isAuthorized);
 
     const [, dropTarget] = useDrop({
         accept: ['bun', 'main', 'sauce'],
+        collect: (monitor) => ({
+            isHover: monitor.isOver(),
+        }),
         drop(itemId) {
             const {id} = itemId as Record<'id', string>;
             dispatch(addIngredientInBurger(id) as unknown as BurgerIngredientsAction);
@@ -32,8 +39,12 @@ function BurgerConstructor() {
     const digitsTextStyle = 'text text_type_digits-medium';
 
     const openModal = () => {
-        dispatch(getOrderThunk(burgerData) as unknown as OrderAction);
-        setIsModalOpened(true);
+        if (!isAuth) {
+            navigate('/login');
+        } else {
+            dispatch(getOrderThunk(burgerData) as unknown as OrderAction);
+            setIsModalOpened(true);
+        }
     }
     const isDisable = burgerData.every(item => item.type !== 'bun');
     const closeModal = () => setIsModalOpened(false);

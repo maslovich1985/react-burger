@@ -25,9 +25,11 @@ const AppHeader = () => {
                     </NavLink>
                 </div>
             </nav>
-            <div className={styles.logo}>
-                <Logo/>
-            </div>
+            <NavLink to="/">
+                <div className={styles.logo}>
+                    <Logo/>
+                </div>
+            </NavLink>
             <NavLink to="/profile" className={navLinkClass}>
                 <div className={styles.personal_account}>
                     <ProfileIcon type="secondary"/>

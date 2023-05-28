@@ -16,6 +16,7 @@ interface Product {
     type: 'main' | 'bun' | 'sauce';
     __v: number;
     _id: string;
+    id: string;
 }
 
 interface OwnProps {
@@ -44,12 +45,12 @@ const BurgerIngredients: FC<OwnProps> = ({data}) => {
                 {ingredients.map((product: Product, index: number) => {
                         return (
                             <ConstructorItem
-                                key={`${product.name}_${index}`}
+                                key={product.id}
                                 name={product.name}
                                 price={product.price}
-                                itemId={product._id}
+                                itemId={product.id}
                                 image={product.image}
-                                index={index}
+                                ingridientId={product._id}
                             />
                         )
                     }

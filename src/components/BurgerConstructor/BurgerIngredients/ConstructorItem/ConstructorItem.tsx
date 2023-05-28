@@ -5,20 +5,22 @@ import {
     removeIngredientFromBurger
 } from "../../../../services/redux/actions/burgerIngredientsActions";
 import {decreaseIngredientCounter} from "../../../../services/redux/actions/ingredientsListActions";
-import {useDispatch} from "react-redux";
 import {useDrag, useDrop} from "react-dnd";
 import styles from './ConstructorItem.module.css'
+import {useAppDispatch} from "../../../../services/redux/hooks";
+import {BurgerIngredientsAction} from "../../../../services/redux/reducers/burgerIngredientsReducer";
+import {IngredientsListAction} from "../../../../services/redux/reducers/ingredientsListReducer";
 
 interface OwnProps {
     name: string;
     itemId: string;
     price: number;
     image: string;
-    index: number;
+    ingridientId: string;
 }
 
-const ConstructorItem: FC<OwnProps> = ({name, itemId, price, image, index}) => {
-    const dispatch = useDispatch();
+const ConstructorItem: FC<OwnProps> = ({name, itemId, price, image, ingridientId}) => {
+    const dispatch = useAppDispatch();
     const [, drag] = useDrag({
         type: "burgerConstructor",
         item: {itemId},
@@ -33,13 +35,13 @@ const ConstructorItem: FC<OwnProps> = ({name, itemId, price, image, index}) => {
             isHover: monitor.isOver(),
         }),
         drop(item) {
-            const {itemId} = item as Record<'itemId', string>;
-            dispatch(moveIngredientInBurger(itemId, itemId));
+            const {itemId: id} = item as Record<'itemId', string>;
+            dispatch(moveIngredientInBurger(id, itemId) as unknown as BurgerIngredientsAction);
         },
     });
-    const removeFromConstructor = (id: string, index: number) => {
-        dispatch(removeIngredientFromBurger(index));
-        dispatch(decreaseIngredientCounter(id));
+    const removeFromConstructor = (id: string, ingridientId: string) => {
+        dispatch(removeIngredientFromBurger(id) as unknown as BurgerIngredientsAction);
+        dispatch(decreaseIngredientCounter(ingridientId) as unknown as IngredientsListAction);
     }
     return (
         <div ref={dropRef}>
@@ -50,7 +52,7 @@ const ConstructorItem: FC<OwnProps> = ({name, itemId, price, image, index}) => {
                     text={name}
                     price={price}
                     thumbnail={image}
-                    handleClose={() => removeFromConstructor(itemId, index)}
+                    handleClose={() => removeFromConstructor(itemId, ingridientId)}
                 />
             </div>
         </div>

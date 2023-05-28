@@ -10,14 +10,14 @@ interface OwnProps {
 
 export const ProtectedRouteElement: FC<OwnProps> = ({children, onlyUnAuth = false}) => {
     const location = useLocation();
+    const prevPage = location.state ? location.state.from : '/';
     const isAuth = useAppSelector(isAuthorized);
     if (!isAuth && !onlyUnAuth) {
         return <Navigate to="/login" state={{from: location.pathname}}/>;
     }
     if (onlyUnAuth && isAuth) {
-        // const { from } = location.state || { from: { pathname: "/" } };
-        return <Navigate to="/"/>;
+        return <Navigate to={prevPage}/>;
     }
 
-    return children
+    return children;
 }

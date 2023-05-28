@@ -48,16 +48,15 @@ const burgerIngredients = (state = burgerIngredientsState, action: BurgerIngredi
             return {...state, burgerIngredients: burgerData};
 
         case REMOVE_FROM_CONSTRUCTOR:
-            const i = action.payload;
-            const burgerIngredients = [...state.burgerIngredients];
-            burgerIngredients.splice(i, 1);
+            const id = action.payload;
+            const burgerIngredients = state.burgerIngredients.filter((item) => item.id !== id);
             return {...state, burgerIngredients};
 
         case MOVE_IN_CONSTRUCTOR:
             const {prevId, nextId} = action.payload;
             const burgerItems = [...state.burgerIngredients];
-            const prevIndex = burgerItems.findIndex(item => item._id === prevId);
-            const nextIndex = burgerItems.findIndex(item => item._id === nextId);
+            const prevIndex = burgerItems.findIndex(item => item.id === prevId);
+            const nextIndex = burgerItems.findIndex(item => item.id === nextId);
             const movedItems = burgerItems.splice(prevIndex, 1);
             burgerItems.splice(nextIndex, 0, movedItems[0]);
             return {...state, burgerIngredients: burgerItems};
