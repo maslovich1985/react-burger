@@ -7,11 +7,13 @@ import {BurgerIngredientsActionType} from "./types/burgerIngredientsTypes";
 import {IngredientsListActionType} from "./types/ingredientsListTypes";
 import {OrderActionType} from "./types/orderTypes";
 import {UserActionType} from "./types/userTypes";
+import {socketMiddleware} from "./socketMiddleware";
+import {WsActionType} from "./types/wsTypes";
 
 
 export const store = createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
+    composeWithDevTools(applyMiddleware(thunk, socketMiddleware()))
 );
 
 export type AppDispatch = typeof store.dispatch;
@@ -23,7 +25,8 @@ export type AppActions = {
         | BurgerIngredientsActionType
         | IngredientsListActionType
         | OrderActionType
-        | UserActionType;
+        | UserActionType
+        | WsActionType;
     payload?: any;
 };
 

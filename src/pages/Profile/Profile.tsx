@@ -40,7 +40,10 @@ function Profile() {
             navigate('/profile/orders');
         }
         if (type === profilePanel.logout) {
-            Promise.resolve(dispatch(logoutUser() as unknown as UserAction)).then(() => navigate('/'));
+            Promise.resolve(dispatch(logoutUser(() => navigate('/')) as unknown as UserAction));
+        }
+        if (type === profilePanel.profile) {
+            navigate('/profile');
         }
     }
     const cancelHandler = () => {

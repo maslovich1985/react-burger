@@ -2,6 +2,7 @@ import {getCookie} from './cookie'
 import {Ingredient} from "../pages/IngredientPage/IngredientPage";
 
 const NORMA_API = 'https://norma.nomoreparties.space/api';
+export const wssBaseApiUrl = 'wss://norma.nomoreparties.space/orders';
 
 interface Ingredients {
     data: Ingredient[];

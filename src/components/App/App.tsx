@@ -11,12 +11,16 @@ import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 import Profile from "../../pages/Profile/Profile";
 import {MainPage} from "../../pages/MainPage/MainPage";
 import {ProtectedRouteElement} from "../ProtectedRoute/ProtectedRoute"
-import Orders from "../../pages/Orders/Orders";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import {useAppDispatch} from "../../services/redux/hooks";
 import {IngredientsListAction} from "../../services/redux/reducers/ingredientsListReducer";
 import {UserAction} from "../../services/redux/reducers/userReducer";
+import Feed from "../../pages/Feed/Feed";
+import FeedIdPage from "../../pages/FeedIdPage/FeedIdPage";
+import OrderIdPage from "../../pages/OrderIdPage/OrderIdPage";
+import OrderNumberInfo from "../OrderNumberInfo/OrderNumberInfo";
+import {Orders} from "../../pages/Orders/Orders";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -25,7 +29,7 @@ function App() {
     useEffect(() => {
         dispatch(getIngredientsThunk() as unknown as IngredientsListAction);
         dispatch(userProfileThunk() as unknown as UserAction);
-    }, [dispatch])
+    }, [])
 
     return (
         <>
@@ -40,6 +44,16 @@ function App() {
                         </ProtectedRouteElement>
                     }
                 />
+                <Route
+                    path='/profile/orders/:id'
+                    element={
+                        <ProtectedRouteElement>
+                            <OrderIdPage/>
+                        </ProtectedRouteElement>
+                    }
+                />
+                <Route path='/feed' element={<Feed/>}/>
+                <Route path='/feed/:id' element={<FeedIdPage/>}/>
                 <Route path="/ingredients/:id" element={<IngredientPage/>}/>
                 <Route
                     path="/login"
@@ -89,6 +103,22 @@ function App() {
                         element={
                             <Modal isShowHeader={true}>
                                 <IngredientDetails/>
+                            </Modal>
+                        }
+                    />
+                    <Route
+                        path='/feed/:id'
+                        element={
+                            <Modal isShowHeader={false}>
+                                <OrderNumberInfo/>
+                            </Modal>
+                        }
+                    />
+                    <Route
+                        path='/profile/orders/:id'
+                        element={
+                            <Modal isShowHeader={false}>
+                                <OrderNumberInfo/>
                             </Modal>
                         }
                     />

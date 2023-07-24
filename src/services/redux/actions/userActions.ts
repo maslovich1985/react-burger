@@ -228,14 +228,16 @@ export const resetPassWithCode = (pass: string, code: string) => (dispatch: AppD
     }).catch(() => dispatch(resetPassWithCodeError() as unknown as UserAction));
 };
 
-export const logoutUser = () => (dispatch: AppDispatch) => {
-    dispatch(userRequest() as unknown as UserAction);
-    logout().then((res) => {
-        deleteCookie('accessToken');
-        deleteCookie('refreshToken');
-        dispatch(loguotUserSuccess() as unknown as UserAction);
-    }).catch(() => dispatch(loguotUserError() as unknown as UserAction));
-};
+export const logoutUser = (cb: () => void
+) =>
+    (dispatch: AppDispatch) => {
+        dispatch(userRequest() as unknown as UserAction);
+        logout().then((res) => {
+            deleteCookie('accessToken');
+            deleteCookie('refreshToken');
+            dispatch(loguotUserSuccess() as unknown as UserAction);
+        }).then(() => cb()).catch(() => dispatch(loguotUserError() as unknown as UserAction));
+    };
 
 export const updateUserProfile = (name: string, email: string) => (dispatch: AppDispatch) => {
     dispatch(userRequest() as unknown as UserAction);
