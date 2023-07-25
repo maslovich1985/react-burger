@@ -14,8 +14,6 @@ import {ProtectedRouteElement} from "../ProtectedRoute/ProtectedRoute"
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
 import {useAppDispatch} from "../../services/redux/hooks";
-import {IngredientsListAction} from "../../services/redux/reducers/ingredientsListReducer";
-import {UserAction} from "../../services/redux/reducers/userReducer";
 import Feed from "../../pages/Feed/Feed";
 import FeedIdPage from "../../pages/FeedIdPage/FeedIdPage";
 import OrderIdPage from "../../pages/OrderIdPage/OrderIdPage";
@@ -27,8 +25,8 @@ function App() {
     const location = useLocation();
     const background = location.state && location.state.background;
     useEffect(() => {
-        dispatch(getIngredientsThunk() as unknown as IngredientsListAction);
-        dispatch(userProfileThunk() as unknown as UserAction);
+        dispatch(getIngredientsThunk());
+        dispatch(userProfileThunk());
     }, [])
 
     return (

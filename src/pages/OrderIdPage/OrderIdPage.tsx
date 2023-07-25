@@ -4,7 +4,6 @@ import {useEffect} from 'react';
 import {wssBaseApiUrl} from '../../utils/burger-api';
 import {useAppDispatch, useAppSelector} from "../../services/redux/hooks";
 import {selectWsConnectionStatus} from "../../services/redux/selectors/wsSelectors";
-import {IWebsocketAction} from "../../services/redux/reducers/websocket";
 import {wsConnectionStart} from "../../services/redux/actions/websocket";
 import {WS_CONNECTION_CLOSED} from "../../services/redux/types/wsTypes";
 
@@ -13,7 +12,7 @@ const OrderIdPage = () => {
     const wsConnected = useAppSelector(selectWsConnectionStatus);
 
     useEffect(() => {
-        wsConnected !== true && dispatch(wsConnectionStart(`${wssBaseApiUrl}/all`) as unknown as IWebsocketAction);
+        wsConnected !== true && dispatch(wsConnectionStart(`${wssBaseApiUrl}/all`));
 
         return () => {
             dispatch({type: WS_CONNECTION_CLOSED});

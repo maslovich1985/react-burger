@@ -11,7 +11,7 @@ export const ingredientDetailsState: InitialState = {
 
 export interface ViewedIngredientAction {
     type: ViewedIngredientActionType;
-    payload?: any;
+    payload?: IngredientWithCount;
 }
 
 const burgerIngredientsReducer = (state = ingredientDetailsState, action: ViewedIngredientAction) => {

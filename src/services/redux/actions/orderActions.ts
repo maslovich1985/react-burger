@@ -1,8 +1,8 @@
 import {GET_ORDER_ERROR, GET_ORDER_REQUEST, GET_ORDER_SUCCESS} from "../types/orderTypes";
 import {getOrder} from "../../../utils/burger-api";
-import {AppActions, AppDispatch} from "../store";
+import {AppActions} from "../store";
 import {IngredientWithCount} from "../../../components/BurgerIngredients/IngredientsType/IngredientCard/IngredientCard";
-import {OrderAction} from "../reducers/orderReducer";
+import {AppDispatch} from "../hooks";
 
 export interface Order {
     name: string;
@@ -35,9 +35,9 @@ export const getOrderThunk = (data: IngredientWithCount[]) => (dispatch: AppDisp
     if (data.length !== 0) {
         const ingredientsId = data.map(ingredient => ingredient._id);
         const orderBody = {ingredients: ingredientsId};
-        dispatch(getOrderRequest() as unknown as OrderAction);
+        dispatch(getOrderRequest());
         getOrder(orderBody).then(res => {
-            dispatch(getOrderSuccess(res) as unknown as OrderAction)
-        }).catch(() => dispatch(getOrderError() as unknown as OrderAction));
+            dispatch(getOrderSuccess(res))
+        }).catch(() => dispatch(getOrderError()));
     }
 }

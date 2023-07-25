@@ -30,8 +30,8 @@ import {
     userRegister
 } from "../../../utils/burger-api";
 import {deleteCookie, setCookie} from '../../../utils/cookie'
-import {AppActions, AppDispatch} from "../store";
-import {UserAction} from "../reducers/userReducer";
+import {AppActions} from "../store";
+import {AppDispatch} from "../hooks";
 
 
 interface Profile {
@@ -147,20 +147,20 @@ const loguotUserError = (): AppActions => {
 
 export const userRegisterThunk = (data: Register) => (dispatch: AppDispatch) => {
     if (data) {
-        dispatch(userRequest() as unknown as UserAction);
+        dispatch(userRequest());
         userRegister(data).then(res => {
-            dispatch(userRegisterSuccess(res) as unknown as UserAction);
+            dispatch(userRegisterSuccess(res));
             setCookie('accessToken', res.accessToken);
             setCookie('refreshToken', res.refreshToken);
-        }).catch(() => dispatch(userRegisterError() as unknown as UserAction));
+        }).catch(() => dispatch(userRegisterError()));
     }
 }
 
 export const userLoginThunk = (data: Login) => (dispatch: AppDispatch) => {
     if (data) {
-        dispatch(userRequest() as unknown as UserAction);
+        dispatch(userRequest());
         userLogin(data).then(res => {
-            dispatch(userLoginSuccess(res) as unknown as UserAction);
+            dispatch(userLoginSuccess(res));
             setCookie('accessToken', res.accessToken);
             setCookie('refreshToken', res.refreshToken);
         }).catch((e) => {
@@ -169,80 +169,80 @@ export const userLoginThunk = (data: Login) => (dispatch: AppDispatch) => {
                     .then((data) => {
                         setCookie('accessToken', data.accessToken);
                         setCookie('refreshToken', data.refreshToken);
-                        dispatch(refreshTokenSuccess() as unknown as UserAction);
+                        dispatch(refreshTokenSuccess());
                     })
                     .then(() => {
                         userLogin(data)
-                            .then((data) => dispatch(userLoginSuccess(data) as unknown as UserAction))
+                            .then((data) => dispatch(userLoginSuccess(data)))
                             .catch(() => {
-                                dispatch(userLoginError() as unknown as UserAction)
-                                dispatch(refreshTokenError() as unknown as UserAction);
+                                dispatch(userLoginError())
+                                dispatch(refreshTokenError());
                             });
                     })
-                    .catch(() => dispatch(refreshTokenError() as unknown as UserAction));
+                    .catch(() => dispatch(refreshTokenError()));
             } else {
-                dispatch(userLoginError() as unknown as UserAction)
+                dispatch(userLoginError())
             }
         });
     }
 }
 
 export const userProfileThunk = () => (dispatch: AppDispatch) => {
-    dispatch(userRequest() as unknown as UserAction);
+    dispatch(userRequest());
     userProfile().then(res => {
-        dispatch(userProfileSuccess(res) as unknown as UserAction);
+        dispatch(userProfileSuccess(res));
     }).catch((e) => {
         if (e.message === 'jwt expired') {
             return refreshToken()
                 .then((data) => {
                     setCookie('accessToken', data.accessToken);
                     setCookie('refreshToken', data.refreshToken);
-                    dispatch(refreshTokenSuccess() as unknown as UserAction);
+                    dispatch(refreshTokenSuccess());
                 })
                 .then(() => {
                     userProfile()
-                        .then((data) => dispatch(userProfileSuccess(data) as unknown as UserAction))
+                        .then((data) => dispatch(userProfileSuccess(data)))
                         .catch(() => {
-                            dispatch(userProfileError() as unknown as UserAction)
-                            dispatch(refreshTokenError() as unknown as UserAction);
+                            dispatch(userProfileError())
+                            dispatch(refreshTokenError());
                         });
                 })
-                .catch(() => dispatch(refreshTokenError() as unknown as UserAction));
+                .catch(() => dispatch(refreshTokenError()));
         } else {
-            dispatch(userProfileError() as unknown as UserAction)
+            dispatch(userProfileError())
         }
     });
 }
 
 export const resetUserPassword = (email: string) => (dispatch: AppDispatch) => {
-    dispatch(userRequest() as unknown as UserAction);
+    dispatch(userRequest());
     resetPassword(email).then(() => {
-        dispatch(resetPassSuccess() as unknown as UserAction);
-    }).catch(() => dispatch(resetPassError() as unknown as UserAction));
+        dispatch(resetPassSuccess());
+    }).catch(() => dispatch(resetPassError()));
 };
 
 export const resetPassWithCode = (pass: string, code: string) => (dispatch: AppDispatch) => {
-    dispatch(userRequest() as unknown as UserAction);
+    dispatch(userRequest());
     resetPasswordWithCode(pass, code).then(() => {
-        dispatch(resetPassWithCodeSuccess() as unknown as UserAction);
-    }).catch(() => dispatch(resetPassWithCodeError() as unknown as UserAction));
+        dispatch(resetPassWithCodeSuccess());
+    }).catch(() => dispatch(resetPassWithCodeError()));
 };
 
 export const logoutUser = (cb: () => void
 ) =>
     (dispatch: AppDispatch) => {
-        dispatch(userRequest() as unknown as UserAction);
+        dispatch(userRequest());
         logout().then((res) => {
             deleteCookie('accessToken');
             deleteCookie('refreshToken');
-            dispatch(loguotUserSuccess() as unknown as UserAction);
-        }).then(() => cb()).catch(() => dispatch(loguotUserError() as unknown as UserAction));
+            dispatch(loguotUserSuccess());
+        }).then(() => cb()).catch(() => dispatch(loguotUserError()));
     };
 
 export const updateUserProfile = (name: string, email: string) => (dispatch: AppDispatch) => {
-    dispatch(userRequest() as unknown as UserAction);
+    dispatch(userRequest());
     updateProfile(name, email).then((data) => {
-        dispatch(updateProfileSuccess(data) as unknown as UserAction);
+        dispatch(updateProfileSuccess(data));
     })
         .catch((e) => {
             if (e.message === 'jwt expired') {
@@ -250,20 +250,20 @@ export const updateUserProfile = (name: string, email: string) => (dispatch: App
                     .then((data) => {
                         setCookie('accessToken', data.accessToken);
                         setCookie('refreshToken', data.refreshToken);
-                        dispatch(refreshTokenSuccess() as unknown as UserAction);
+                        dispatch(refreshTokenSuccess());
                     })
                     .then(() => {
                         updateProfile(name, email)
                             .then((data) =>
-                                dispatch(updateProfileSuccess(data) as unknown as UserAction)
+                                dispatch(updateProfileSuccess(data))
                             )
                             .catch(() => {
-                                dispatch(updateProfileError() as unknown as UserAction);
-                                dispatch(refreshTokenError() as unknown as UserAction);
+                                dispatch(updateProfileError());
+                                dispatch(refreshTokenError());
                             });
                     });
             } else {
-                dispatch(updateProfileError() as unknown as UserAction);
+                dispatch(updateProfileError());
             }
         });
 };

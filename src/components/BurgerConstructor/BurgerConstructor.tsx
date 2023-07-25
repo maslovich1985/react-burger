@@ -11,9 +11,6 @@ import {burgerIngredients} from "../../services/redux/selectors/burgerIngredient
 import {increaseIngredientCounter} from "../../services/redux/actions/ingredientsListActions";
 import {useAppDispatch, useAppSelector} from "../../services/redux/hooks";
 import {IngredientWithCount} from "../BurgerIngredients/IngredientsType/IngredientCard/IngredientCard";
-import {BurgerIngredientsAction} from "../../services/redux/reducers/burgerIngredientsReducer";
-import {IngredientsListAction} from "../../services/redux/reducers/ingredientsListReducer";
-import {OrderAction} from "../../services/redux/reducers/orderReducer";
 import {isAuthorized} from "../../services/redux/selectors/userSelectors";
 import {useNavigate} from "react-router-dom";
 
@@ -30,8 +27,8 @@ function BurgerConstructor() {
         }),
         drop(itemId) {
             const {id} = itemId as Record<'id', string>;
-            dispatch(addIngredientInBurger(id) as unknown as BurgerIngredientsAction);
-            dispatch(increaseIngredientCounter(id) as unknown as IngredientsListAction);
+            dispatch(addIngredientInBurger(id));
+            dispatch(increaseIngredientCounter(id));
         },
     });
     const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
@@ -42,7 +39,7 @@ function BurgerConstructor() {
         if (!isAuth) {
             navigate('/login');
         } else {
-            dispatch(getOrderThunk(burgerData) as unknown as OrderAction);
+            dispatch(getOrderThunk(burgerData));
             setIsModalOpened(true);
         }
     }

@@ -4,7 +4,6 @@ import StatusOrder from '../../components/StatusOrder/StatusOrder';
 import {useEffect} from 'react';
 import {wssBaseApiUrl} from '../../utils/burger-api';
 import {useAppDispatch} from "../../services/redux/hooks";
-import {IWebsocketAction} from "../../services/redux/reducers/websocket";
 import {wsConnectionStart} from "../../services/redux/actions/websocket";
 import {WS_CONNECTION_CLOSED} from "../../services/redux/types/wsTypes";
 
@@ -12,7 +11,7 @@ const Feed = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        setTimeout(() => dispatch(wsConnectionStart(`${wssBaseApiUrl}/all`) as unknown as IWebsocketAction), 500);
+        setTimeout(() => dispatch(wsConnectionStart(`${wssBaseApiUrl}/all`)), 500);
 
         return () => {
             dispatch({type: WS_CONNECTION_CLOSED});

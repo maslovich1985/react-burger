@@ -4,7 +4,6 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {NavLink, useNavigate} from "react-router-dom";
 import {resetUserPassword} from "../../services/redux/actions/userActions";
 import {useAppDispatch} from "../../services/redux/hooks";
-import {UserAction} from "../../services/redux/reducers/userReducer";
 
 function ForgotPassword() {
     const dispatch = useAppDispatch();
@@ -13,7 +12,7 @@ function ForgotPassword() {
 
     const handleRecoverPass = (e: FormEvent) => {
         e.preventDefault();
-        Promise.resolve(dispatch(resetUserPassword(email) as unknown as UserAction))
+        Promise.resolve(dispatch(resetUserPassword(email)))
             .then(() => {
                 navigate('/reset-password', {state: {from: '/forgot-password'}})
             })

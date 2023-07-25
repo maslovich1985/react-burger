@@ -5,7 +5,6 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {userRegisterThunk} from "../../services/redux/actions/userActions";
 import {isAuthorized} from '../../services/redux/selectors/userSelectors'
 import {useAppDispatch, useAppSelector} from "../../services/redux/hooks";
-import {UserAction} from "../../services/redux/reducers/userReducer";
 
 
 function Register() {
@@ -18,7 +17,7 @@ function Register() {
     const [isPassShown, setIsPassShown] = useState<boolean>(false);
     const handleUserRegister = useCallback((e: FormEvent) => {
         e.preventDefault();
-        dispatch(userRegisterThunk({name, email, password}) as unknown as UserAction);
+        dispatch(userRegisterThunk({name, email, password}));
     }, [name, email, password, dispatch])
 
     useEffect(() => {

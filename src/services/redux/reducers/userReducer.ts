@@ -33,7 +33,7 @@ interface InitialState {
 
 export interface UserAction {
     type: UserActionType;
-    payload: any;
+    payload: { user: User };
 }
 
 export const userState: InitialState = {

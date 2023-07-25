@@ -6,8 +6,6 @@ import {wssBaseApiUrl} from '../../utils/burger-api';
 import {getCookie} from '../../utils/cookie';
 import {useAppDispatch} from "../../services/redux/hooks";
 import {logoutUser} from "../../services/redux/actions/userActions";
-import {IWebsocketAction} from "../../services/redux/reducers/websocket";
-import {UserAction} from "../../services/redux/reducers/userReducer";
 import {WS_CONNECTION_CLOSED} from "../../services/redux/types/wsTypes";
 import {wsConnectionStart} from "../../services/redux/actions/websocket";
 
@@ -22,7 +20,7 @@ export const Orders = () => {
                 `${wssBaseApiUrl}?token=${
                     getCookie('accessToken')?.split(' ')[1] || ''
                 }`
-            ) as unknown as IWebsocketAction);
+            ));
 
         return () => {
             dispatch({type: WS_CONNECTION_CLOSED});
@@ -30,7 +28,7 @@ export const Orders = () => {
     }, []);
 
     const handleUserLogoutClick = async () => {
-        await dispatch(logoutUser(() => navigate('/')) as unknown as UserAction);
+        await dispatch(logoutUser(() => navigate('/')));
     };
 
     const handleOrderHistoryClick = () => {
