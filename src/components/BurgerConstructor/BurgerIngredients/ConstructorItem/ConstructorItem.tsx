@@ -8,8 +8,6 @@ import {decreaseIngredientCounter} from "../../../../services/redux/actions/ingr
 import {useDrag, useDrop} from "react-dnd";
 import styles from './ConstructorItem.module.css'
 import {useAppDispatch} from "../../../../services/redux/hooks";
-import {BurgerIngredientsAction} from "../../../../services/redux/reducers/burgerIngredientsReducer";
-import {IngredientsListAction} from "../../../../services/redux/reducers/ingredientsListReducer";
 
 interface OwnProps {
     name: string;
@@ -36,12 +34,12 @@ const ConstructorItem: FC<OwnProps> = ({name, itemId, price, image, ingridientId
         }),
         drop(item) {
             const {itemId: id} = item as Record<'itemId', string>;
-            dispatch(moveIngredientInBurger(id, itemId) as unknown as BurgerIngredientsAction);
+            dispatch(moveIngredientInBurger(id, itemId));
         },
     });
     const removeFromConstructor = (id: string, ingridientId: string) => {
-        dispatch(removeIngredientFromBurger(id) as unknown as BurgerIngredientsAction);
-        dispatch(decreaseIngredientCounter(ingridientId) as unknown as IngredientsListAction);
+        dispatch(removeIngredientFromBurger(id));
+        dispatch(decreaseIngredientCounter(ingridientId));
     }
     return (
         <div ref={dropRef}>

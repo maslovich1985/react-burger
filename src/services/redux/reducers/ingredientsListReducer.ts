@@ -23,7 +23,7 @@ export const ingredientsListState: InitialState = {
 
 export interface IngredientsListAction {
     type: IngredientsListActionType;
-    payload: any;
+    payload: Ingredient[] | string;
 }
 
 

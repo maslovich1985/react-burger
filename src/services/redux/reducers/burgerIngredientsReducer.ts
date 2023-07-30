@@ -16,14 +16,14 @@ export const burgerIngredientsState: InitialState = {
 
 export interface BurgerIngredientsAction {
     type: BurgerIngredientsActionType;
-    payload?: any;
+    payload?: IngredientWithCount & string & { prevId: string, nextId: string };
 }
 
 const burgerIngredients = (state = burgerIngredientsState, action: BurgerIngredientsAction) => {
     switch (action.type) {
         case ADD_TO_CONSTRUCTOR:
             const ingredient = action.payload;
-            if (ingredient.type === 'bun') {
+            if (ingredient && ingredient?.type === 'bun') {
                 if (state.burgerIngredients.length === 0) {
                     return {...state, burgerIngredients: [ingredient, ingredient]}
                 }
@@ -44,7 +44,9 @@ const burgerIngredients = (state = burgerIngredientsState, action: BurgerIngredi
                 return {...state, burgerIngredients: [ingredient]}
             }
             const burgerData = [...state.burgerIngredients];
-            burgerData.splice(1, 0, ingredient);
+            if (typeof ingredient === "object") {
+                burgerData.splice(1, 0, ingredient);
+            }
             return {...state, burgerIngredients: burgerData};
 
         case REMOVE_FROM_CONSTRUCTOR:
@@ -53,10 +55,9 @@ const burgerIngredients = (state = burgerIngredientsState, action: BurgerIngredi
             return {...state, burgerIngredients};
 
         case MOVE_IN_CONSTRUCTOR:
-            const {prevId, nextId} = action.payload;
             const burgerItems = [...state.burgerIngredients];
-            const prevIndex = burgerItems.findIndex(item => item.id === prevId);
-            const nextIndex = burgerItems.findIndex(item => item.id === nextId);
+            const prevIndex = burgerItems.findIndex(item => item.id === action.payload?.prevId);
+            const nextIndex = burgerItems.findIndex(item => item.id === action.payload?.prevId);
             const movedItems = burgerItems.splice(prevIndex, 1);
             burgerItems.splice(nextIndex, 0, movedItems[0]);
             return {...state, burgerIngredients: burgerItems};

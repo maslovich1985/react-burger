@@ -7,8 +7,8 @@ import {
 } from "../types/ingredientsListTypes";
 import {getIngredients} from "../../../utils/burger-api";
 import {Ingredient} from "../../../pages/IngredientPage/IngredientPage";
-import {AppActions, AppDispatch} from "../store";
-import {IngredientsListAction} from "../reducers/ingredientsListReducer";
+import {AppActions} from "../store";
+import {AppDispatch} from "../hooks";
 
 const getIngredientsSucces = (ingredients: Ingredient[]): AppActions => {
     return {
@@ -44,8 +44,8 @@ export const decreaseIngredientCounter = (id: string): AppActions => {
 };
 
 export const getIngredientsThunk = () => (dispatch: AppDispatch) => {
-    dispatch(getIngredientsRequest() as unknown as IngredientsListAction);
+    dispatch(getIngredientsRequest());
     getIngredients().then(res => {
-        dispatch(getIngredientsSucces(res.data) as unknown as IngredientsListAction)
-    }).catch(() => dispatch(getIngredientsError() as unknown as IngredientsListAction));
+        dispatch(getIngredientsSucces(res.data))
+    }).catch(() => dispatch(getIngredientsError()));
 }

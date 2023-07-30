@@ -1,5 +1,6 @@
 import {GET_ORDER_ERROR, GET_ORDER_REQUEST, GET_ORDER_SUCCESS, OrderActionType} from "../types/orderTypes";
 import {Order} from "../actions/orderActions";
+import {IOrder} from "../../../components/Order/Order";
 
 interface InitialState {
     order: Order | null;
@@ -15,7 +16,7 @@ export const orderState: InitialState = {
 
 export interface OrderAction {
     type: OrderActionType;
-    payload?: any;
+    payload?: IOrder;
 }
 
 const orderInfo = (state = orderState, action: OrderAction) => {

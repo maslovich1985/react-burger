@@ -16,7 +16,7 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({onClick, children, isShowHeader}) => {
     const navigate = useNavigate();
     const closeModal = useCallback(() => {
-        onClick ? onClick() : navigate('/');
+        onClick ? onClick() : navigate(-1);
     }, [onClick, navigate]);
     useEffect(() => {
         function handleEscapeKey(event: KeyboardEvent) {

@@ -5,7 +5,6 @@ import {useNavigate} from "react-router-dom";
 import {logoutUser, updateUserProfile} from "../../services/redux/actions/userActions";
 import {email, name} from "../../services/redux/selectors/userSelectors";
 import {useAppDispatch, useAppSelector} from "../../services/redux/hooks";
-import {UserAction} from "../../services/redux/reducers/userReducer";
 
 function Profile() {
     const dispatch = useAppDispatch();
@@ -40,7 +39,10 @@ function Profile() {
             navigate('/profile/orders');
         }
         if (type === profilePanel.logout) {
-            Promise.resolve(dispatch(logoutUser() as unknown as UserAction)).then(() => navigate('/'));
+            Promise.resolve(dispatch(logoutUser(() => navigate('/'))));
+        }
+        if (type === profilePanel.profile) {
+            navigate('/profile');
         }
     }
     const cancelHandler = () => {

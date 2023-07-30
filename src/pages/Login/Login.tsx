@@ -5,7 +5,6 @@ import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {userLoginThunk} from "../../services/redux/actions/userActions";
 import {isAuthorized} from '../../services/redux/selectors/userSelectors'
 import {useAppDispatch, useAppSelector} from "../../services/redux/hooks";
-import {UserAction} from "../../services/redux/reducers/userReducer";
 
 function Login() {
     const dispatch = useAppDispatch();
@@ -18,7 +17,7 @@ function Login() {
     const prevPage = location.state ? location.state.from : '/';
     const handleUserLogin = useCallback((e: FormEvent) => {
         e.preventDefault();
-        dispatch(userLoginThunk({email, password}) as unknown as UserAction)
+        dispatch(userLoginThunk({email, password}))
     }, [email, password, dispatch]);
 
     useEffect(() => {

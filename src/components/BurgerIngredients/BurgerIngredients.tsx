@@ -7,7 +7,6 @@ import {useNavigate} from "react-router-dom";
 import {ingredients} from "../../services/redux/selectors/ingredientsListSelector";
 import {useAppDispatch, useAppSelector} from "../../services/redux/hooks";
 import {IngredientWithCount} from "./IngredientsType/IngredientCard/IngredientCard";
-import {ViewedIngredientAction} from "../../services/redux/reducers/viewedIngredientReducer";
 
 function BurgerIngredients() {
     const navigate = useNavigate();
@@ -19,7 +18,7 @@ function BurgerIngredients() {
     const largeTextStyle = 'text text_type_main-large';
     const openModal = (id: string) => {
         const ingredient = items.find((item) => item._id === id);
-        dispatch(getIngredientDetails(ingredient) as unknown as ViewedIngredientAction);
+        dispatch(getIngredientDetails(ingredient));
         navigate(`/ingredients/${id}`, {state: {background: true}});
     }
 

@@ -5,7 +5,7 @@ import {BurgerIcon, ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-devel
 
 const AppHeader = () => {
     const defaultTextStyle = 'text text_type_main-default';
-    const navLinkClass = ({isActive}: { isActive: boolean }) => isActive ? `${defaultTextStyle} ${styles.active} ml-2` : `${defaultTextStyle} ${styles.inactive} ml-2`
+    const navLinkClass = ({isActive}: Record<"isActive", boolean>) => isActive ? `${defaultTextStyle} ${styles.active} ml-2` : `${defaultTextStyle} ${styles.inactive} ml-2`
 
     return (
         <header className={`${styles.wrapper} mt-10`}>
@@ -20,8 +20,10 @@ const AppHeader = () => {
                 </NavLink>
                 <div className={styles.order_list}>
                     <ListIcon type="secondary"/>
-                    <NavLink to="/profile/orders " className={navLinkClass}>
-                        Лента заказов
+                    <NavLink to="/feed" className={navLinkClass}>
+                        <div className={styles.order_list_text}>
+                            Лента заказов
+                        </div>
                     </NavLink>
                 </div>
             </nav>

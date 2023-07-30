@@ -4,7 +4,6 @@ import {Button, Input} from "@ya.praktikum/react-developer-burger-ui-components"
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {resetPassWithCode} from "../../services/redux/actions/userActions";
 import {useAppDispatch} from "../../services/redux/hooks";
-import {UserAction} from "../../services/redux/reducers/userReducer";
 
 function ResetPassword() {
     const dispatch = useAppDispatch();
@@ -20,7 +19,7 @@ function ResetPassword() {
 
     const handleRecoverPassWithCode = (e: FormEvent) => {
         e.preventDefault();
-        Promise.resolve(dispatch(resetPassWithCode(password, code) as unknown as UserAction))
+        Promise.resolve(dispatch(resetPassWithCode(password, code)))
             .then(() => {
                 navigate('/')
             })

@@ -6,7 +6,6 @@ import IngredientDetails from "../../components/IngredientDetails/IngredientDeta
 import {ingredientDetails} from "../../services/redux/selectors/viewedIngredientSelector";
 import {ingredients} from "../../services/redux/selectors/ingredientsListSelector";
 import {useAppDispatch, useAppSelector} from "../../services/redux/hooks";
-import {ViewedIngredientAction} from "../../services/redux/reducers/viewedIngredientReducer";
 
 export interface Ingredient {
     calories: number;
@@ -31,7 +30,7 @@ function IngredientPage() {
     const details = useAppSelector(ingredientDetails);
     useEffect(() => {
         const ingredient = items.find((item: Ingredient) => item._id === id);
-        dispatch(getIngredientDetails(ingredient) as unknown as ViewedIngredientAction);
+        dispatch(getIngredientDetails(ingredient));
     }, [id, items, dispatch]);
 
     return details && (
