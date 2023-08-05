@@ -36,7 +36,7 @@ export const getOrderThunk = (data: IngredientWithCount[]) => (dispatch: AppDisp
         const ingredientsId = data.map(ingredient => ingredient._id);
         const orderBody = {ingredients: ingredientsId};
         dispatch(getOrderRequest());
-        getOrder(orderBody).then(res => {
+        return getOrder(orderBody).then(res => {
             dispatch(getOrderSuccess(res))
         }).catch(() => dispatch(getOrderError()));
     }

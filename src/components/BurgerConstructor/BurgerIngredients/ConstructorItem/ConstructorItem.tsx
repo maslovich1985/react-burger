@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {ConstructorElement, DeleteIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {
     moveIngredientInBurger,
     removeIngredientFromBurger
@@ -52,6 +52,12 @@ const ConstructorItem: FC<OwnProps> = ({name, itemId, price, image, ingridientId
                     thumbnail={image}
                     handleClose={() => removeFromConstructor(itemId, ingridientId)}
                 />
+                <div
+                    data-cy='remove_ingredient_icon'
+                    style={{display: 'flex'}}
+                >
+                    <DeleteIcon type='primary' onClick={() => removeFromConstructor(itemId, ingridientId)}/>
+                </div>
             </div>
         </div>
     )

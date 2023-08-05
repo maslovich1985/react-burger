@@ -23,7 +23,7 @@ export const ingredientsListState: InitialState = {
 
 export interface IngredientsListAction {
     type: IngredientsListActionType;
-    payload: Ingredient[] | string;
+    payload?: Ingredient[] | string;
 }
 
 
@@ -34,7 +34,10 @@ const ingredientsListReducer = (state = ingredientsListState, action: Ingredient
 
         case GET_INGREDIENTS_SUCCESS:
             const data = action.payload;
-            const ingredientsWithCounter = typeof data !== 'string' ? data.map((item: Ingredient) => ({
+            if (!data) {
+                return {...state};
+            }
+            const ingredientsWithCounter = typeof data !== 'string' ? data?.map((item: Ingredient) => ({
                 ...item,
                 count: 0
             })) : [];

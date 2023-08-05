@@ -45,7 +45,7 @@ function BurgerConstructor() {
     }
     const isDisable = burgerData.every(item => item.type !== 'bun');
     const closeModal = () => setIsModalOpened(false);
-    return (<section ref={dropTarget} className={styles.wrapper}>
+    return (<section ref={dropTarget} className={styles.wrapper} data-cy='constructor-container'>
             <div className={`${styles.burger_constructor} mt-25 mr-4`}>
                 {burgerData.length !== 0 ? <BurgerIngredients data={burgerData}/> : null}
             </div>

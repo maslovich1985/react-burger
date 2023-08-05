@@ -15,13 +15,13 @@ export interface IOrderData {
     totalToday: number;
 }
 
-const initialState = {
+export const initialState = {
     wsConnected: false,
     data: undefined,
 };
 
 export interface IWebsocketAction {
-    type: WsActionType;
+    type?: WsActionType;
     payload?: IOrderData;
 }
 
