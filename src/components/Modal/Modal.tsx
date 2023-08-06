@@ -31,12 +31,12 @@ const Modal: FC<ModalProps> = ({onClick, children, isShowHeader}) => {
     const largeTextStyle = "text text_type_main-large";
     return (
         <>
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} data-cy='modal-wrapper'>
                 <div className={`${styles.modal_header} ml-10 mt-10`}>
                     <div className={`${styles.modal_headerText} ${largeTextStyle}`}>
                         {isShowHeader && 'Детали ингредиента'}
                     </div>
-                    <div onClick={closeModal} className={styles.close_btn}>
+                    <div onClick={closeModal} className={styles.close_btn} data-cy='modal-close-icon'>
                         <CloseIcon type="primary"/>
                     </div>
                 </div>

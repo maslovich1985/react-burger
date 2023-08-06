@@ -15,7 +15,7 @@ export const burgerIngredientsState: InitialState = {
 }
 
 export interface BurgerIngredientsAction {
-    type: BurgerIngredientsActionType;
+    type?: BurgerIngredientsActionType;
     payload?: IngredientWithCount & string & { prevId: string, nextId: string };
 }
 
@@ -51,7 +51,7 @@ const burgerIngredients = (state = burgerIngredientsState, action: BurgerIngredi
 
         case REMOVE_FROM_CONSTRUCTOR:
             const id = action.payload;
-            const burgerIngredients = state.burgerIngredients.filter((item) => item.id !== id);
+            const burgerIngredients = state.burgerIngredients?.filter((item) => item.id !== id);
             return {...state, burgerIngredients};
 
         case MOVE_IN_CONSTRUCTOR:

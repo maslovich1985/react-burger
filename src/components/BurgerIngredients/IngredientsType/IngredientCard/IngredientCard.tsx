@@ -27,7 +27,8 @@ const IngredientCard: FC<OwnProps> = ({products, index, onClick}) => {
     return (
         // !isDrag ?
         (<div ref={dragRef} onClick={() => onClick(products._id)}
-              className={`${index % 2 === 0 ? 'ml-4' : 'ml-6'} ${index > 1 ? 'mt-8' : 'mt-6'} ${styles.wrapper}`}>
+              className={`${index % 2 === 0 ? 'ml-4' : 'ml-6'} ${index > 1 ? 'mt-8' : 'mt-6'} ${styles.wrapper}`}
+              data-cy={`ingredientItem-${products._id}`}>
             {products.count > 0 && (
                 <div className={styles.counter}>
                     <Counter count={products.count} size="default"/>

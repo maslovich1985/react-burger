@@ -43,6 +43,7 @@ function Login() {
                     errorText={'Ошибка'}
                     size={'default'}
                     extraClass="ml-6 mt-6"
+                    data-cy='input-email'
                 />
                 <Input
                     type={isPassShown ? 'text' : 'password'}
@@ -55,6 +56,7 @@ function Login() {
                     errorText={'Ошибка'}
                     size={'default'}
                     extraClass="ml-6 mt-6 mb-6"
+                    data-cy='input-password'
                 />
                 <Button htmlType="submit" type="primary" size="medium">
                     Войти

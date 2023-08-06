@@ -32,8 +32,8 @@ interface InitialState {
 }
 
 export interface UserAction {
-    type: UserActionType;
-    payload: { user: User };
+    type?: UserActionType;
+    payload?: { user: User };
 }
 
 export const userState: InitialState = {
@@ -59,6 +59,9 @@ const userReducer = (state = userState, action: UserAction) => {
         case PASSWORD_RESET_SUCCESS:
         case PASSWORD_RESET_WITH_CODE_SUCCESS:
             const data = action.payload;
+            if (!data) {
+                return state;
+            }
             return {
                 ...state,
                 user: {email: data.user.email, name: data.user.name},

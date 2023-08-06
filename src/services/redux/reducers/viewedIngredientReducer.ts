@@ -10,7 +10,7 @@ export const ingredientDetailsState: InitialState = {
 };
 
 export interface ViewedIngredientAction {
-    type: ViewedIngredientActionType;
+    type?: ViewedIngredientActionType;
     payload?: IngredientWithCount;
 }
 

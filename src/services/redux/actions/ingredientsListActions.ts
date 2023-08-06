@@ -45,7 +45,7 @@ export const decreaseIngredientCounter = (id: string): AppActions => {
 
 export const getIngredientsThunk = () => (dispatch: AppDispatch) => {
     dispatch(getIngredientsRequest());
-    getIngredients().then(res => {
+    return getIngredients().then(res => {
         dispatch(getIngredientsSucces(res.data))
     }).catch(() => dispatch(getIngredientsError()));
 }

@@ -15,7 +15,7 @@ export const orderState: InitialState = {
 }
 
 export interface OrderAction {
-    type: OrderActionType;
+    type?: OrderActionType;
     payload?: IOrder;
 }
 

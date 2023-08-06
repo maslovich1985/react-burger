@@ -189,7 +189,7 @@ export const userLoginThunk = (data: Login) => (dispatch: AppDispatch) => {
 
 export const userProfileThunk = () => (dispatch: AppDispatch) => {
     dispatch(userRequest());
-    userProfile().then(res => {
+    return userProfile().then(res => {
         dispatch(userProfileSuccess(res));
     }).catch((e) => {
         if (e.message === 'jwt expired') {
@@ -232,7 +232,7 @@ export const logoutUser = (cb: () => void
 ) =>
     (dispatch: AppDispatch) => {
         dispatch(userRequest());
-        logout().then((res) => {
+        return logout().then((res) => {
             deleteCookie('accessToken');
             deleteCookie('refreshToken');
             dispatch(loguotUserSuccess());
